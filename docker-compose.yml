@@ -1,0 +1,17 @@
+services:
+  main:
+    build:
+      context: ./main
+      dockerfile: Dockerfile
+    ports:
+      - "4000:4000"
+  sidecar:
+    build:
+      context: ./sidecar
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - MAIN_APP_URL=http://main:4000
+    depends_on:
+      - main
