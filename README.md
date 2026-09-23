@@ -9,6 +9,8 @@ In simple terms, a **sidecar** is used to extend or enhance an application's fun
 
 In this folder, I built a simple proxy server sidecar that intercepts incoming requests, logs the metadata, and forwards the payload to the main application. It's the simplest practical use case to demonstrate how a sidecar sits in the request path.
 
+This sidecar container uses 2 parameter (PORT, MAIN_APP_URL). MAIN_APP_URL is used for forwarding the request to the main Application and PORT is used for defining the PORT on which the sidecar container is running. You can change those variable inside docker-compose.yml
+
 ---
 
 ## Best Practices Learned
