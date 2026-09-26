@@ -1,0 +1,28 @@
+services:
+  main:
+    build:
+      context: ./main
+      dockerfile: dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+  postgres:
+    image: postgres:16-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=mysecretpassword
+  ambassadar:
+    build:
+      context: ./ambassadar
+      dockerfile: dockerfile
+    network_mode: "service:main"
+  broker:
+    build:
+      context: ./broker
+      dockerfile: dockerfile
+    ports:
+      - "4000:4000"
+    environment:
+      - PORT=4000
