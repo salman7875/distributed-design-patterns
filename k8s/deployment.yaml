@@ -1,0 +1,85 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: main-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: main-app
+  template:
+    metadata:
+      labels:
+        app: main-app
+    spec:
+      containers:
+        - name: main-app
+          image: salman7875/rep-load-server:1.1
+          ports:
+            - containerPort: 3000
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cache-layer
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: cache-layer
+  template:
+    metadata:
+      labels:
+        app: cache-layer
+    spec:
+      containers:
+        - name: varnish
+          image: varnish
+          ports:
+            - containerPort: 8081
+          args:
+            - "-F"
+            - "-a"
+            - ":8081"
+            - "-f"
+            - "/etc/varnish/default.vcl"
+            - "-s"
+            - "malloc,256m"
+          volumeMounts:
+            - name: config-volume
+              mountPath: /etc/varnish/default.vcl
+              subPath: default.vcl
+      volumes:
+        - name: config-volume
+          configMap:
+            name: cache-config
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:alpine
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: config-vol
+              mountPath: /etc/nginx/nginx.conf
+              subPath: nginx.conf
+      volumes:
+        - name: config-vol
+          configMap:
+            name: nginx-lb-caching
