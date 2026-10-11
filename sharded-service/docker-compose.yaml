@@ -1,0 +1,35 @@
+services:
+  main:
+    build:
+      context: ./main
+      dockerfile: dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+  ambassadar:
+    build:
+      context: ./ambassadar
+      dockerfile: dockerfile
+    network_mode: "service:main"
+  cache-server-1:
+    image: memcached:latest
+    ports:
+      - "11211:11211"
+    command:
+      - --conn-limit=1024
+      - --memory-limit=64
+  cache-server-2:
+    image: memcached:latest
+    ports:
+      - "11212:11212"
+    command:
+      - --conn-limit=1024
+      - --memory-limit=64
+  cache-server-3:
+    image: memcached:latest
+    ports:
+      - "11213:11213"
+    command:
+      - --conn-limit=1024
+      - --memory-limit=64
