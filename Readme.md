@@ -1,9 +1,9 @@
-# Scatter Gatter Pattern
+# Scatter Gather Pattern
 This pattern runs in two phase (i.e, scatter phase and gatter phase). 
 
 In scatter phase the cordinator server broadcast requests to multiple receipent servers. The receipent server sends the response to the cordinator server.
 
-In gatter phase the cordinator server combines the response received from the receipents and returns the unified response
+In gather phase the cordinator server combines the response received from the receipents and returns the unified response
 
 ## diagram
 ```mermaid
