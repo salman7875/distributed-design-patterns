@@ -48,5 +48,5 @@ curl http://localhost:3000/products?q=iphone&cat=Electronics
 # Mock server -
 # Main server sends the requests to mock server with this url
 # q = product_name, cat = product_category, platform = products_platform, delay = miliseconds and fr = failure rate range (0 -> 0.10)
-curl http://localhost:3000/products?q=iphone&cat=Electronics&platform=flipkart&delay=500&fr=0.2
+curl http://localhost:4000/products?q=iphone&cat=Electronics&platform=flipkart&delay=500&fr=0.2
 ```
