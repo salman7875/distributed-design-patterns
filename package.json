@@ -1,0 +1,22 @@
+{
+  "name": "scatter-gatter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "dev:server": "node server.js",
+    "dev:mock-server": "node mock-server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/salman7875/distributed-design-patterns.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/salman7875/distributed-design-patterns/issues"
+  },
+  "homepage": "https://github.com/salman7875/distributed-design-patterns#readme"
+}
